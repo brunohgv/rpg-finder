@@ -20,7 +20,8 @@
                     <v-card-title>
                       <div>
                         <div class="headline">{{ table.title }}</div>
-                        <div>{{ table.city }}/{{ table.state }}</div>
+                        <div>{{ table.type }}</div>
+                        <div v-if="!isOnline(table)">{{ table.city }}/{{ table.state }}</div>
                         <div><span v-for="day in table.days">{{ day }} </span></div>
                         <div>{{ table.system }}</div>
                       </div>
@@ -41,6 +42,11 @@
     computed: {
       tables () {
         return this.$store.getters.loadedTables
+      }
+    },
+    methods: {
+      isOnline (table) {
+        return table.type === 'Online'
       }
     }
   }
